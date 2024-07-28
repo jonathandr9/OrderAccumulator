@@ -1,4 +1,4 @@
-using OrderAccumulator.API.ViewModels;
+using OrderAccumulator.API.Configuration;
 using OrderAccumulator.IoC;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,7 +9,8 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddAutoMapper(typeof(ApiMapperProfile));
+builder.Services.AddAutoMapperConfigs();
+
 DependencyInjection.RegisterConfigurations(builder.Services, builder.Configuration);
 DependencyInjection.RegisterServices(builder.Services);
 DependencyInjection.RegisterAdapters(builder.Services);

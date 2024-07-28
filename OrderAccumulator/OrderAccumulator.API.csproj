@@ -15,4 +15,10 @@
     <ProjectReference Include="..\OrderAccumulator.IoC\OrderAccumulator.IoC.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="FinancialExposureDBFile.db">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

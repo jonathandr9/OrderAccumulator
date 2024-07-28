@@ -1,9 +1,10 @@
-﻿using OrderAccumulator.Domain.Models;
+﻿using OrderAccumulator.Domain.Request;
+using OrderAccumulator.Domain.Response;
 
 namespace OrderAccumulator.Domain.Services
 {
     public interface IOrderService
     {
-        Task<FinancialExposure> CalculateFinancialExposure(Order order);
+        Task<OrderResponse> CalculateFinancialExposure(OrderRequest order);
     }
 }

@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using OrderAccumulator.API.ViewModels;
-using OrderAccumulator.Domain.Models;
+using OrderAccumulator.Domain.Request;
+using OrderAccumulator.Domain.Response;
 using OrderAccumulator.Domain.Services;
 using System.Net.Mime;
 
@@ -23,31 +23,16 @@ namespace OrderAccumulator.API.Controllers
             _orderService = orderService;
         }
 
-        [HttpPost("CalculoExposicaoFinanceira")]
+        [HttpPost("exposicao-financeira")]
         [Consumes(MediaTypeNames.Application.Json)]
-        [ProducesResponseType(typeof(OrderResult), 200)]
+        [ProducesResponseType(typeof(OrderResponse), 200)]
         [Produces("application/json")]
-        public async Task<OrderResult> FinancialExposure(
+        public async Task<OrderResponse> CalculateFinancialExposure(
             OrderRequest orderPost
         )
         {
-            try
-            {
-                var order = _mapper.Map<Order>(orderPost);
-
-                var result = await _orderService
-                    .CalculateFinancialExposure(order);
-
-                return _mapper.Map<OrderResult>(result);
-            }
-            catch (Exception ex)
-            {
-                return new OrderResult{
-                    Sucesso = false,
-                    Exposicao_Atual = null,
-                    Msg_Erro = ex.Message
-                };
-            }
+            return await _orderService
+                .CalculateFinancialExposure(orderPost);
         }
     }
 }

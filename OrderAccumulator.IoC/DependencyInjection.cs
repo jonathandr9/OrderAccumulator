@@ -1,6 +1,9 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using FinancialExposure.DbAdapter;
+using FinancialExposure.DbAdapter.Configuration;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using OrderAccumulator.Application;
+using OrderAccumulator.Domain.Adapters;
 using OrderAccumulator.Domain.Services;
 
 namespace OrderAccumulator.IoC
@@ -21,6 +24,7 @@ namespace OrderAccumulator.IoC
 
         public static void RegisterAdapters(IServiceCollection services)
         {
+            services.AddScoped<IOrderSqlAdapter, OrderSqlAdapter>();
         }
 
         public static void RegisterProjectAdapters(
@@ -28,6 +32,10 @@ namespace OrderAccumulator.IoC
             ConfigurationManager configuration
         )
         {
+            services.AddAgendamentoOnlineSqlAdapter(
+               configuration.GetSection("FinancialExposureDbAdapterConfiguration")
+               .Get<FinancialExposureDbAdapterConfiguration>()
+               );
         }
     }
 }

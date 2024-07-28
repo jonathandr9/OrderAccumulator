@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using OrderAccumulator.Domain.Models;
+using OrderAccumulator.Domain.Request;
 
 namespace OrderAccumulator.API.ViewModels
 {

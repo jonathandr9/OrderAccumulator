@@ -1,4 +1,4 @@
-﻿namespace OrderAccumulator.API.ViewModels
+﻿namespace OrderAccumulator.Domain.Request
 {
     public class OrderRequest
     {

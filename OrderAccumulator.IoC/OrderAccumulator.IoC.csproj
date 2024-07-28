@@ -13,6 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\FinancialExposure.DbAdapter\FinancialExposure.DbAdapter.csproj" />
     <ProjectReference Include="..\OrderAccumulator.Application\OrderAccumulator.Application.csproj" />
     <ProjectReference Include="..\OrderAccumulator.Domain\OrderAccumulator.Domain.csproj" />
   </ItemGroup>

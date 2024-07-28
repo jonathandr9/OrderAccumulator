@@ -1,6 +1,6 @@
-﻿namespace OrderAccumulator.API.ViewModels
+﻿namespace OrderAccumulator.Domain.Response
 {
-    public class OrderResult
+    public class OrderResponse
     {
         public bool Sucesso { get; set; }
         public decimal? Exposicao_Atual { get; set; }

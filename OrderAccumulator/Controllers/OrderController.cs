@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using OrderAccumulator.Domain.Models.Response;
 using OrderAccumulator.Domain.Request;
 using OrderAccumulator.Domain.Response;
 using OrderAccumulator.Domain.Services;
@@ -33,6 +34,15 @@ namespace OrderAccumulator.API.Controllers
         {
             return await _orderService
                 .CalculateFinancialExposure(orderPost);
+        }
+
+        [HttpGet()]
+        [Consumes(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(typeof(GetOrdersResponse), 200)]
+        [Produces("application/json")]
+        public async Task<GetOrdersResponse> GetAllOrders()
+        {
+            return await _orderService.GetOrdersList();
         }
     }
 }

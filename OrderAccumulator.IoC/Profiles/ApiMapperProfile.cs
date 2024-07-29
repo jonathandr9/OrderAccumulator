@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using OrderAccumulator.Domain.DbModels;
 using OrderAccumulator.Domain.Models;
+using OrderAccumulator.Domain.Models.Response;
 using OrderAccumulator.Domain.Request;
 using OrderAccumulator.Domain.Response;
 
@@ -27,8 +28,16 @@ namespace OrderAccumulator.API.ViewModels
                 .ForMember(d => d.msg_erro, m => m.MapFrom(s => MsgFinancialExposureTreat(s.Success)));
 
             CreateMap<OrderDbModel, OrderModel>();
+
             CreateMap<OrderModel, OrderDbModel>()
                 .ForMember(d => d.Date, m => m.MapFrom(s => DateTime.Now.ToString()));
+
+            CreateMap<OrderDbModel, GetOrdersReponseItem>()
+                .ForMember(d => d.ativo, m => m.MapFrom(s => s.Asset))
+                .ForMember(d => d.lado, m => m.MapFrom(s => s.Side))
+                .ForMember(d => d.quantidade, m => m.MapFrom(s => s.Quantity))
+                .ForMember(d => d.data, m => m.MapFrom(s => s.Date))
+                .ForMember(d => d.preco, m => m.MapFrom(s => s.Price));
         }
 
         #region "HelperMethods"

@@ -34,8 +34,8 @@ jobs:
 
     - name: Zip Package
       run: |
-        cd '${{github.workspace}}/out'
-        zip -r '${{github.workspace}}/out.zip'
+        cd ${{ github.workspace }}/out 
+        zip -r ${{ github.workspace }}/out.zip *
 
     - name: Deploy to EB
       uses: einaregilsson/beanstalk-deploy@v22
@@ -45,6 +45,6 @@ jobs:
         application_name: orderaccumulator
         environment_name: orderaccumulator-dev
         region: us-east-1
-        version_label: 12345
-        version_description: ${{github.sha}}
-        deployment_package: ${{github.workspace}}/out.zip
+        version_label: ${{ github.run_id }}
+        version_description: ${{ github.sha }}
+        deployment_package: ${{ github.workspace }}/out.zip

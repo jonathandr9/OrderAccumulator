@@ -35,5 +35,27 @@ namespace FinancialExposure.DbAdapter
                 ",
                commandType: CommandType.Text);
         }
+
+        public async Task Add(OrderDbModel orderAdd)
+        {
+            await
+               _context.Connection.ExecuteAsync(
+              @" INSERT INTO [Order]
+                    ([Id]
+                    ,[Asset]
+                    ,[Side]
+                    ,[Quantity]
+                    ,[Price]
+                    ,[Date])
+                VALUES
+                    (@Id
+                    ,@Asset
+                    ,@Side
+                    ,@Quantity
+                    ,@Price
+                    ,@Date);",
+              param: orderAdd,
+              commandType: CommandType.Text);
+        }
     }
 }

@@ -2,8 +2,8 @@
 {
     public class OrderResponse
     {
-        public bool Sucesso { get; set; }
-        public decimal? Exposicao_Atual { get; set; }
-        public string Msg_Erro { get; set; }
+        public bool sucesso { get; set; }
+        public decimal? exposicao_atual { get; set; }
+        public string msg_erro { get; set; }
     }
 }

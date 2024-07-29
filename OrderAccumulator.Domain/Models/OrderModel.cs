@@ -1,6 +1,6 @@
 ﻿namespace OrderAccumulator.Domain.Models
 {
-    public class Order
+    public class OrderModel
     {
         public string Asset { get; set; }
         public char Side { get; set; }

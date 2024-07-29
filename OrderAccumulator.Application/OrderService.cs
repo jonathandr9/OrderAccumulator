@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using OrderAccumulator.Domain.Adapters;
+using OrderAccumulator.Domain.DbModels;
 using OrderAccumulator.Domain.Models;
 using OrderAccumulator.Domain.Request;
 using OrderAccumulator.Domain.Response;
@@ -23,33 +24,37 @@ namespace OrderAccumulator.Application
             OrderRequest orderPost)
         {
 
+            var result = new FinancialExposureModel();
+
             try
             {
-
-                //Incluir View Model Dentro do Service.
-                var order = _mapper.Map<Order>(orderPost);
-
-
-                var result = new FinancialExposure();
-
-                //1. Busca as ordens salvas na exposição financeira
-                var allOrders = await _orderSqlAdapter.GetAll();
-                //2. Inclui a nova ordem no objeto para calculo
-                //2. Realiza o calculo
-                //3. Verificar se ordem aprovada Exposição < 1.000.000
-                //4. Se aprovada registra a ordem
-                //5. Se não aprovada rejeita a ordem
-                //6. Retorna objeto de exposição financeira
+                var newOrder = _mapper.Map<OrderModel>(orderPost);
+                
+                var allOrders = _mapper.Map<List<OrderModel>>(
+                    await _orderSqlAdapter.GetAll()
+                );                
+                allOrders.Add(newOrder);
+                
+                result.ExposureValueCalc(allOrders);
+                                
+                if (result.ExposureValueCheck())
+                {
+                    var orderToAddDb = _mapper.Map<OrderDbModel>(newOrder);
+                    await _orderSqlAdapter.Add(orderToAddDb);
+                }               
 
                 return _mapper.Map<OrderResponse>(result);
             }
             catch (Exception ex)
             {
+                //TODO: Enhancement: Add Ex.Message to the application logs
+
                 return new OrderResponse
                 {
-                    Sucesso = false,
-                    Exposicao_Atual = null,
-                    Msg_Erro = ex.Message
+                    sucesso = false,
+                    exposicao_atual = null,
+                    msg_erro = "Ocorreu um erro ao cacular a Exposição," +
+                    "entre em contato com o Administrador."
                 };
             }
         }

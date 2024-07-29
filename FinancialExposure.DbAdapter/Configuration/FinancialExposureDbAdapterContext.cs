@@ -1,6 +1,5 @@
-﻿using System.Data.SqlClient;
+﻿using Microsoft.Data.Sqlite;
 using System.Data;
-using Microsoft.Data.Sqlite;
 
 namespace FinancialExposure.DbAdapter.Configuration
 {

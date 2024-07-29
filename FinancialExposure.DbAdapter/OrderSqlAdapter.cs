@@ -41,15 +41,13 @@ namespace FinancialExposure.DbAdapter
             await
                _context.Connection.ExecuteAsync(
               @" INSERT INTO [Order]
-                    ([Id]
-                    ,[Asset]
+                    ([Asset]
                     ,[Side]
                     ,[Quantity]
                     ,[Price]
                     ,[Date])
                 VALUES
-                    (@Id
-                    ,@Asset
+                    (@Asset
                     ,@Side
                     ,@Quantity
                     ,@Price

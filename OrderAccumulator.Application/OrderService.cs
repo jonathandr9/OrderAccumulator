@@ -55,7 +55,7 @@ namespace OrderAccumulator.Application
                     sucesso = false,
                     exposicao_atual = null,
                     msg_erro = "Ocorreu um erro ao cacular a Exposição," +
-                    "entre em contato com o Administrador."
+                    ex.Message
                 };
             }
         }
